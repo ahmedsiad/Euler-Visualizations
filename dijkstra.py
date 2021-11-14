@@ -37,13 +37,13 @@ class Edge:
         self.weight = int(weight)
         self.weight_text = None
         
-class Dijsktra(Scene):
+class Dijkstra(Scene):
     def construct(self):
-        title = Text('Project Euler: Problem 83')
-        subtitle = Text('VISUALIZED')
+        title = Text('Problem 83: Path Sum')
+        subtitle = Text('Find the minimum path sum in a grid.', font_size=36)
         
         subtitle.next_to(title, DOWN, buff = 0.5)
-        
+
         self.play(Write(title))
         self.wait()
         
@@ -164,6 +164,9 @@ class Dijsktra(Scene):
                     new_entry.move_to(entry.get_center())
                     entry.become(new_entry)
                     update_table_animations.append(Write(entry))
+            current_entry = tracker_table.get_entries((ord(visiting_node.name) - ord("A") + 2, 1))
+            current_entry.set_fill(GRAY)
+            update_table_animations.append(DrawBorderThenFill(current_entry))
             if len(update_table_animations) > 0: self.play(*update_table_animations)
             self.wait()
             
